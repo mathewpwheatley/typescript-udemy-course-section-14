@@ -9,10 +9,13 @@ router.get('/login', function (req, res) {
 });
 router.post('/login', function (req, res) {
     var _a = req.body, email = _a.email, password = _a.password;
-    if (email && password) {
-        res.send(email + password);
+    if (email && password && email === 'hi@hi.com' && password === 'password') {
+        // Mark person as logged in
+        req.session = { loggedIn: true };
+        // Redirect to root route
+        res.redirect('/');
     }
     else {
-        res.send('You must provide an email');
+        res.send('Invalid email or password');
     }
 });
